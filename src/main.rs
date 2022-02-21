@@ -21,18 +21,9 @@ fn main() -> Result<(), i32> {
             Ok(f) => {
                 let h = ElfHeader64::new(&f);
                 if h.is_elf() {
-                    println!("Yep, that's an ELF file");
-                    match h.arch_bits() {
-                        CLASS_64 => {
-                            println!("64-bit");
-                        },
-                        CLASS_32 => {
-                            println!("32-bit");
-                        },
-                        _ => {
-                            println!("no idea what this is");
-                        }
-                    }
+                    println!("Class: {}", class_lookup(h.arch_bits()));
+                    println!("Endianess: {}", data_lookup(h.endianess()));
+                    println!("OS: {}", os_lookup(h.os()));
                 } else {
                     println!("That's not an ELF file");
                 }

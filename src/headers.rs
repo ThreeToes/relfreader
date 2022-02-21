@@ -2,9 +2,17 @@ use std::fs::File;
 use std::io::Read;
 use crate::constants::*;
 
+pub struct EIdent {
+
+}
+
 pub trait Header {
     fn is_elf(&self) -> bool;
     fn arch_bits(&self) -> u8;
+    fn endianess(&self) -> u8;
+    fn elf_version(&self) -> u8;
+    fn os(&self) -> u8;
+    fn abi_version(&self) -> u8;
 }
 
 pub struct ElfHeader64 {
@@ -34,6 +42,22 @@ impl Header for ElfHeader64{
 
     fn arch_bits(&self) -> u8 {
         self.e_ident[4]
+    }
+
+    fn endianess(&self) -> u8 {
+        self.e_ident[5]
+    }
+
+    fn elf_version(&self) -> u8 {
+        self.e_ident[6]
+    }
+
+    fn os(&self) -> u8 {
+        self.e_ident[7]
+    }
+
+    fn abi_version(&self) -> u8 {
+        self.e_ident[8]
     }
 }
 
@@ -95,5 +119,21 @@ impl Header for ElfHeader32{
 
     fn arch_bits(&self) -> u8 {
         self.e_ident[4]
+    }
+
+    fn endianess(&self) -> u8 {
+        self.e_ident[5]
+    }
+
+    fn elf_version(&self) -> u8 {
+        return self.e_ident[6]
+    }
+
+    fn os(&self) -> u8 {
+        self.e_ident[7]
+    }
+
+    fn abi_version(&self) -> u8 {
+        self.e_ident[8]
     }
 }

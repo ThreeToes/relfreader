@@ -5,7 +5,7 @@ semi-useful in Rust.
 
 ## Building
 ```shell
-$ cargo buil
+$ cargo build
 ```
 
 ## Running 
