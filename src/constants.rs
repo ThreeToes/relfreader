@@ -1,8 +1,3 @@
-// Errors
-pub const NO_FILE_PROVIDED: i32 = 1;
-pub const FILE_NOT_FOUND: i32 = 2;
-pub const NOT_ELF_FILE: i32 = 3;
-
 //TODO: Replace below with enums
 
 // EI_CLASS constants, signifies 32 or 64 bit
@@ -140,3 +135,18 @@ pub const ET_LOOS: u16 = 0xFE00;
 pub const ET_HIOS: u16 = 0xFEFF;
 pub const ET_LOPROC: u16 = 0xFF00;
 pub const ET_HIPROC: u16 = 0xFFFF;
+
+pub fn type_lookup(t: u16) -> String {
+    match t {
+        ET_NONE =>  String::from("Unknown."),
+        ET_REL =>  String::from("Relocatable file."),
+        ET_EXEC =>  String::from("Executable file."),
+        ET_DYN =>  String::from("Shared object."),
+        ET_CORE =>  String::from("Core file."),
+        ET_LOOS =>  String::from("Reserved inclusive range. Operating system specific."),
+        ET_HIOS =>  String::from("Reserved inclusive range. Operating system specific."),
+        ET_LOPROC =>  String::from("Reserved inclusive range. Processor specific."),
+        ET_HIPROC =>  String::from("Reserved inclusive range. Processor specific."),
+        _ => String::from("unknown type"),
+    }
+}
